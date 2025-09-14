@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Counter with Sound Loop</title>
+</head>
+<body>
+  <h1>Counter: <span id="counter">0</span></h1>
+
+  <!-- Silent or real audio, no autoplay -->
+  <audio id="sound" src="silent.mp3" loop></audio>
+
+  <button id="startBtn">Start</button>
+
+  <script>
+    let count = 0;
+    let intervalId = null;
+    const counterElement = document.getElementById("counter");
+    const sound = document.getElementById("sound");
+    const startBtn = document.getElementById("startBtn");
+
+    startBtn.addEventListener("click", () => {
+      if (!intervalId) {
+        // start counter
+        intervalId = setInterval(() => {
+          count++;
+          counterElement.textContent = count;
+        }, 1000);
+
+        // start looping audio
+        sound.play();
+
+        // disable button after first click
+        startBtn.disabled = true;
+      }
+    });
+  </script>
+</body>
+</html>
